@@ -4,6 +4,7 @@ import datetime
 # Third part imports
 from flask import request
 import pandas as pd
+from datetime import date
 
 from ms import app
 from ms.functions import get_model_response
@@ -15,12 +16,14 @@ version = "v1.0.0"
 
 
 @app.route('/info', methods=['GET'])
+@app.route('/', methods=['GET'])
 def info():
     """Return model information, version, how to call"""
     result = {}
 
     result["name"] = model_name
     result["version"] = version
+    result['date'] = date.today().strftime("%Y-%m-%d")
 
     return result
 
@@ -45,7 +48,6 @@ def predict():
         return {'error': str(e).split('\n')[-1].strip()}, 500
 
     return response, 200
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
