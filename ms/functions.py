@@ -9,6 +9,11 @@ def predict(X, model):
 
 def get_model_response(json_data):
     X = pd.DataFrame.from_dict(json_data)
+    with open('model_results.txt','r') as f:
+        model_results = f.read()
+
+    print(f"Accuracy of model is : {model_results}")
+    
     prediction = predict(X, model)
     if prediction == 1:
         label = "M"

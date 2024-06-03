@@ -31,7 +31,7 @@ def info():
 @app.route('/health', methods=['GET'])
 def health():
     """Return service health"""
-    return 'ok'
+    return 'ok!!!!'
 
 
 @app.route('/predict', methods=['POST'])

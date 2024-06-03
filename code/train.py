@@ -1,5 +1,4 @@
 # Import packages
-from sklearn.ensemble import VotingClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
@@ -7,6 +6,7 @@ from sklearn.svm import SVC
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
+from sklearn.ensemble import VotingClassifier
 from sklearn.metrics import ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -31,7 +31,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 estimators = []
 estimators.append(('logistic', LogisticRegression()))
 estimators.append(('cart', DecisionTreeClassifier()))
-estimators.append(('svm', SVC())
+estimators.append(('svm', SVC()))
 
 # Create the Ensemble Model
 ensemble = VotingClassifier(estimators)
@@ -48,6 +48,8 @@ pipe.fit(X_train, y_train)
 
 # Test Accuracy
 print("Accuracy: %s" % str(pipe.score(X_test, y_test)))
+with open('model_results.txt','w') as f:
+    f.write(str(pipe.score(X_test, y_test)))
 
 # Plot confusion matrix
 # print(ConfusionMatrixDisplay.from_estimator(pipe, X_test, y_test))
