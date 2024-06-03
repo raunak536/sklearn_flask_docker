@@ -31,7 +31,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 estimators = []
 estimators.append(('logistic', LogisticRegression()))
 estimators.append(('cart', DecisionTreeClassifier()))
-estimators.append(('svm', SVC()))
+estimators.append(('svm', SVC())
 
 # Create the Ensemble Model
 ensemble = VotingClassifier(estimators)
@@ -50,8 +50,8 @@ pipe.fit(X_train, y_train)
 print("Accuracy: %s" % str(pipe.score(X_test, y_test)))
 
 # Plot confusion matrix
-print(ConfusionMatrixDisplay.from_estimator(pipe, X_test, y_test))
-plt.show()
+# print(ConfusionMatrixDisplay.from_estimator(pipe, X_test, y_test))
+# plt.show()
 
 # Export model
 joblib.dump(pipe, gzip.open('model/model_binary.dat.gz', "wb"))
